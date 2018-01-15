@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mazeapp.MazeGameController">
+	<center>
+		<HBox BorderPane.alignment="TOP_RIGHT">
+			<children>
+				<VBox spacing="10" alignment="TOP_RIGHT">
+					<children>
+						<Button alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="100" text="Start Game" />
+						<Button alignment="BOTTOM_RIGHT" prefHeight="25.0" prefWidth="100" text="End Game" />
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+	</center>
+</BorderPane>
