@@ -12,7 +12,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MazeGame.fxml"));
-			Scene scene = new Scene(root,520,450);
+			Scene scene = new Scene(root,600,450);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Maze game");
 			primaryStage.setScene(scene);

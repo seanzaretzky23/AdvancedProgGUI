@@ -41,7 +41,7 @@ public class MazeGameController implements Initializable{
 		 mazeBoard.draw();
 	 
 		 root.widthProperty().addListener((observable, oldValue, newValue) -> {
-		 double boardNewWidth = newValue.doubleValue() - 120;
+		 double boardNewWidth = newValue.doubleValue() - 180; // make the number a const!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		 mazeBoard.setPrefWidth(boardNewWidth);
 		 mazeBoard.draw();
 		 });
