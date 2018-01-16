@@ -6,7 +6,7 @@ package reversiLogic;
 public class main {
 
     public static void main(String[] args) {
-        GameManager game=new GameManager();
+        GameManager game=new GameManager(new InOutTerminal());
         while (true){
         	game.playNextGameIteration();
         }

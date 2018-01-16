@@ -4,20 +4,26 @@ import java.util.Scanner;
 
 public class InOutTerminal implements InOutAbs {
 
-    public int InInt(){
-        int num=reader.nextInt();
-        return num;
-    };
-    public String InString(){return "";};
+	private Scanner reader;
+	
+	public InOutTerminal() {
+		reader = new Scanner(System.in);
+	}
+	
+	@Override
+    public BoardCell receiveMove(){
+        int row = reader.nextInt(); // check for input validity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        int col = reader.nextInt();
+        //adjusting the received co'ordinates (the board starts at 1 but stored as starting at 0)
+        row = row - 1;
+        col = col - 1;
+        return new BoardCell(row, col);
+    }
 
-    private Scanner reader = new Scanner(System.in);
-
+    @Override
     public void PrintString(String str){
         System.out.print(str);
-    };
-    public void PrintChar(char ch){
-        System.out.print(ch);
-    };
+    }
 
     @Override
     public void PrintWhosTurn(boolean whosTurn) {
@@ -31,6 +37,7 @@ public class InOutTerminal implements InOutAbs {
             System.out.println("O: It's your move.");
         }
     }
+    @Override
     public void PrintOptions(ArrayList<BoardCell> possibleMoves){
 
         System.out.print("Your possible moves: ");
@@ -47,23 +54,24 @@ public class InOutTerminal implements InOutAbs {
             }
         }
     };
-    public void PrintInt(){
-
-    };
+    @Override
     public void PrintNotPosMove(){
         System.out.println("your choice isn't one of the offered moves");
-    };
+    }
 
+    @Override
    public void PrintEnterMovesInForm(){
        System.out.print("\nPlease enter your move in the format: row col\n");
        System.out.println("(two integers with a space between them, for example: 3 4  )");
        System.out.println("notice: only the first two integers will be taken");
-   };
+   }
+   @Override
     public void PrintInvaidInput(){
         System.out.println("invalid input, try again");
-    };
+   }
+   @Override
     public void PrintBoard(int boardLength,int boardWidth,
-                            ArrayList<ArrayList<SquareColor>> gameBoard)
+                            ArrayList<ArrayList<Board.SquareColor>> gameBoard)
     {
 
     	System.out.print(" |");
@@ -113,6 +121,7 @@ public class InOutTerminal implements InOutAbs {
             //cout << "" << endl;
         }
     }
+   @Override
     public void PrintGameOver(){
         System.out.println("Game is over. the final board:");
     }
@@ -128,21 +137,21 @@ public class InOutTerminal implements InOutAbs {
 
     }
 
-    ;
+    @Override
     public void PrintWhoWon(int winner){
         switch(winner) {
-                    case 1:
-                        System.out.println("Player1 (X) is the winner");
-                        //cout << "Player1 (X) is the winner" << endl;
-                        break;
-                    case 2:
-                        System.out.println("player2 (O) is the winner");
-                        //cout << "player2 (O) is the winner" << endl;
-                        break;
-                    case 3:
-                        System.out.println("Its a tie");
-                        //cout << "Its a tie" << endl;
-                }
+        	case 1:
+        		System.out.println("Player1 (X) is the winner");
+        		//cout << "Player1 (X) is the winner" << endl;
+        		break;
+        	case 2:
+        		System.out.println("player2 (O) is the winner");
+        		//cout << "player2 (O) is the winner" << endl;
+        		break;
+        	case 3:
+        		System.out.println("Its a tie");
+        		//cout << "Its a tie" << endl;
+        }
     }
-};
+}
 

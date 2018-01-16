@@ -24,17 +24,17 @@ public class StandardLogic extends GameLogic {
      *       !!! if the received color is Blank throws exception
      *       (only White and Black are legal) !!!
      **************************************************************/
-    public ArrayList<BoardCell> possibleMovesForColor(SquareColor color){
+    public ArrayList<BoardCell> possibleMovesForColor(Board.SquareColor color){
         ArrayList<BoardCell> possibleMoves=new ArrayList<BoardCell>();
 
-        if (color == SquareColor.Blank) {
+        if (color == Board.SquareColor.Blank) {
             throw new IllegalArgumentException("only Black and White are valid inputs");
         }
 
         for (int i = 0; i < this.gameBoard.getBoardLength(); i++) {
             for (int j = 0; j < this.gameBoard.getBoardWidth(); j++) {
                 BoardCell tmp=new BoardCell(i, j);
-                if ((this.gameBoard.getColorOfBoardCell(i, j) == SquareColor.Blank) &&
+                if ((this.gameBoard.getColorOfBoardCell(i, j) == Board.SquareColor.Blank) &&
                 (!boardCellsCreatingScoreLines(tmp, color).isEmpty())) {
                     possibleMoves.add(tmp);
                 }
@@ -53,7 +53,7 @@ public class StandardLogic extends GameLogic {
      *       player to play the next turn (!if the move being made isn't one of the valid options
      *       returned by possibleMovesForColor than throws exception)
      **************************************************************/
-    public boolean makeMove(BoardCell boardCell, SquareColor color){
+    public boolean makeMove(BoardCell boardCell, Board.SquareColor color){
         ArrayList<BoardCell> options = possibleMovesForColor(color);
 
         //variable containing if the received boardCell is one of the boardCells in options vector
@@ -72,7 +72,7 @@ public class StandardLogic extends GameLogic {
                 this.turnAllPawnsBetweenTheCells(boardCell, cellsUntilWhichToFlip.get(i));
             }
 
-            if (color == SquareColor.White) {
+            if (color == Board.SquareColor.White) {
                 return true; //Black
             } else {
                 return false; //White
@@ -90,15 +90,15 @@ public class StandardLogic extends GameLogic {
      * with the received boardCell (of the received color) form line
      * that give score in the game
      **************************************************************/
-    protected ArrayList<BoardCell> boardCellsCreatingScoreLines(BoardCell boardCell, SquareColor color){
+    protected ArrayList<BoardCell> boardCellsCreatingScoreLines(BoardCell boardCell, Board.SquareColor color){
 
         ArrayList<BoardCell> boardCells=new ArrayList<BoardCell>();
 
-        SquareColor oppositeColor;
-        if (color == SquareColor.White) {
-            oppositeColor = SquareColor.Black;
+        Board.SquareColor oppositeColor;
+        if (color == Board.SquareColor.White) {
+            oppositeColor = Board.SquareColor.Black;
         } else {
-            oppositeColor = SquareColor.White;
+            oppositeColor = Board.SquareColor.White;
         }
 
         //boolean array of size 8 representing if we want to continue the search in each one
@@ -144,12 +144,12 @@ public class StandardLogic extends GameLogic {
      * Function operation: initializes the vector used in the method
      *       boardCellsCreatingScoreLines
      **************************************************************/
-    private void initializeBoolVectorForBCCSLmethod(ArrayList<Boolean> vec, BoardCell boardCell, SquareColor color){
-        SquareColor oppositeColor;
-        if (color == SquareColor.White) {
-            oppositeColor = SquareColor.Black;
+    private void initializeBoolVectorForBCCSLmethod(ArrayList<Boolean> vec, BoardCell boardCell, Board.SquareColor color){
+        Board.SquareColor oppositeColor;
+        if (color == Board.SquareColor.White) {
+            oppositeColor = Board.SquareColor.Black;
         } else {
-            oppositeColor = SquareColor.White;
+            oppositeColor = Board.SquareColor.White;
         }
 
         //the co'ordinates of the boardCell
@@ -199,14 +199,14 @@ public class StandardLogic extends GameLogic {
      **************************************************************/
     private void helperMethodForBCCSL(ArrayList<Boolean> contSearch, int index,ArrayList<BoardCell> boardCells,
                               int xCoefficient, int yCoefficient, int xCor, int yCor, int i,
-                              SquareColor color) {
+                              Board.SquareColor color) {
         if (contSearch.get(index) && this.gameBoard.validBoardCell(xCor + (xCoefficient * i), yCor + (yCoefficient * i))) {
             if (this.gameBoard.getColorOfBoardCell(xCor + (xCoefficient * i), yCor + (yCoefficient * i)) == color) {
                 boardCells.add(new BoardCell(xCor + (xCoefficient * i), yCor + (yCoefficient * i)));
                 contSearch.set(index, false);
             } else {
                 if (this.gameBoard.getColorOfBoardCell(xCor + (xCoefficient * i), yCor + (yCoefficient * i))
-                        == SquareColor.Blank) {
+                        == Board.SquareColor.Blank) {
                     contSearch.set(index, false);
                 }
             }

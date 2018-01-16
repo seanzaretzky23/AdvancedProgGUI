@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
-    protected SquareColor playersColor;
+    protected Board.SquareColor playersColor;
     public Player(){};
     /**************************************************************
      * function name: Player class builder
@@ -12,8 +12,8 @@ public abstract class Player {
      * Function operation: creates a Player object of the specified color.
      *      throws an exception if color is Blank
      **************************************************************/
-    public Player(SquareColor color){
-        if (color == SquareColor.Blank) {
+    public Player(Board.SquareColor color){
+        if (color == Board.SquareColor.Blank) {
             throw new IllegalArgumentException("player's color can only be black or white");
         } else {
             this.playersColor = color;
@@ -25,7 +25,7 @@ public abstract class Player {
      * Input: no input
      * @return the color of the player
      **************************************************************/
-    public SquareColor getColor(){
+    public Board.SquareColor getColor(){
         return this.playersColor;
     };
 

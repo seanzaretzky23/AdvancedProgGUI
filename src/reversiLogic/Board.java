@@ -2,9 +2,11 @@ package reversiLogic;
 import java.util.ArrayList;
 //BoardCell;
 
-enum SquareColor {Black, White, Blank};
+//public enum SquareColor {Black, White, Blank};
 
 public abstract class Board {
+	public enum SquareColor {Black, White, Blank};
+	
     protected int boardLength;
     protected int boardWidth;
     protected ArrayList<ArrayList<SquareColor>> gameBoard;
@@ -209,5 +211,21 @@ public abstract class Board {
         return true;
 
     };
+    
+    /**************************************************************
+     * function name: getBoard
+     * Input: no input
+     * @return SquareColor[][]
+     * Function operation: returns the board in a matrix form
+     **************************************************************/
+    public SquareColor[][] getBoard() {
+    	SquareColor[][] returnBoard = new SquareColor[this.boardLength][this.boardWidth];
+    	for (int i = 0; i < returnBoard.length; i++) {
+    		for (int j = 0; j < returnBoard[0].length; j++) {
+    			returnBoard[i][j] = this.gameBoard.get(i).get(j);
+    		}
+    	}
+    	return returnBoard;
+    }
 }
 

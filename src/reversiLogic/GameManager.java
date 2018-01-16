@@ -4,41 +4,42 @@ import java.util.ArrayList;
 public class GameManager {
     /**************************************************************
      * function name: Game class builder
-     * Input: no input
+     * Input: no input, InOutAbs communicationAdapt
      * @return Game object instance
      * Function operation: creates a Game object,
      *      creates two human players and 8X8 board (default)
      *************************************************************/
-    public GameManager(){
+    public GameManager(InOutAbs communicationAdapt){
 
         whosTurn=true;
         noMoves=false;
         gameOver=false;
         this.players=new Player[2];
-        this.players[0] = new HumanPlayer(SquareColor.Black);
-        this.players[1] = new HumanPlayer(SquareColor.White);
+        this.players[0] = new HumanPlayer(Board.SquareColor.Black);
+        this.players[1] = new HumanPlayer(Board.SquareColor.White);
         //calling for ConsoleBoard with the default parameters
         this.board = new ConsoleBoard();
         this.gameLogic = new StandardLogic(this.board);
-        command=new InOutTerminal();
+        command=communicationAdapt;
     };
 
     /**************************************************************
      * function name: Game class builder
-     * Input: int boardSize
+     * Input: int boardSize, InOutAbs communicationAdapt
      * @return Game object instance
      * Function operation: creates a Game object,
      *      creates two human players and boardSize X boardSize board
      **************************************************************/
-    public GameManager(int boardSize){
+    public GameManager(int boardSize, InOutAbs communicationAdapt){
         whosTurn=true;
         noMoves=false;
         gameOver=false;
-        this.players[0] = new HumanPlayer(SquareColor.Black);
-        this.players[1] = new HumanPlayer(SquareColor.White);
+        this.players=new Player[2];
+        this.players[0] = new HumanPlayer(Board.SquareColor.Black);
+        this.players[1] = new HumanPlayer(Board.SquareColor.White);
         this.board = new ConsoleBoard(boardSize, boardSize);
         this.gameLogic = new StandardLogic(this.board);
-        command=new InOutTerminal();
+        command=communicationAdapt;
     };
 
     /**************************************************************
@@ -181,8 +182,11 @@ public class GameManager {
             }
         }
     };
-
-
+    
+    
+    public Board.SquareColor[][] getGameBoard() {
+    	return this.board.getBoard();
+    }
 
 //2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private Player[] players; // players[0] is for player 1 and players[1] is for player 2

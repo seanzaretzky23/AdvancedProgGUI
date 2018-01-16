@@ -1,5 +1,6 @@
 package reversiGUI;
 
+import reversiLogic.GameManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,13 +24,13 @@ import javafx.stage.Stage;
 public class MazeGameController implements Initializable{
 	@FXML
 	 private BorderPane root;
-	 private int[][] maze = {{0,1,0,1,0,0,0,1,0,0,0}, {0,1,0,1,1,1,0,1,0,1,0}, {0,0,0,1,0,0,0,1,0,1,0}, {1,1,0,1,1,1,0,1,0,1,1},
-			 {0,1,0,0,0,0,0,0,0,0,0}, {1,1,0,1,0,1,1,1,1,1,1}, {0,0,0,1,0,0,0,0,0,1,0}, {0,1,0,1,1,1,1,1,0,1,0},
-			 {0,1,0,0,0,0,0,1,0,1,0}, {1,1,0,1,1,1,0,1,1,1,0}, {0,0,0,0,0,1,0,0,0,0,0}};
+	 private GameManager gameManger;
 	
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
-		 MazeBoardController mazeBoard = new MazeBoardController(maze);
+		 int boardSize = 8; // read it from the settings file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 this.gameManger = new GameManager(boardSize, new InOutGUI());
+		 MazeBoardController mazeBoard = new MazeBoardController(this.gameManger.getGameBoard());
 		 mazeBoard.setPrefWidth(410);
 		 mazeBoard.setPrefHeight(410);
 		 
@@ -67,7 +68,6 @@ public class MazeGameController implements Initializable{
 		 
 		 //root.getChildren().add(0, mazeBoard);
 		 root.setLeft(mazeBoard);
-		 root.setOnKeyPressed(mazeBoard.getOnKeyPressed());
 		 root.setOnMouseClicked(mazeBoard.getOnMouseClicked());
 		 mazeBoard.draw();
 	 

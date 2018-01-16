@@ -9,8 +9,8 @@ public class HumanPlayer extends Player {
      * Function operation: creates a HumanPlayer object of the specified color.
      *      throws an exception if color is Blank
      **************************************************************/
-    public HumanPlayer(SquareColor color){
-        if (color == SquareColor.Blank) {
+    public HumanPlayer(Board.SquareColor color){
+        if (color == Board.SquareColor.Blank) {
             throw new IllegalArgumentException("player's color can only be black or white");
         } else {
             this.playersColor = color;
@@ -29,7 +29,7 @@ public class HumanPlayer extends Player {
         if (possibleMoves.size() == 0) {
             throw new IllegalArgumentException("empty possibleMoves vector is invalid");
         }
-        int row=0, col=0;
+        BoardCell chosenCell = null;
         //variable contains if the user's choice for a move was valid
         boolean ok = false;
 
@@ -53,23 +53,19 @@ public class HumanPlayer extends Player {
 //            System.out.println("notice: only the first two integers will be taken");
             command.PrintEnterMovesInForm();
             //Scanner reader = new Scanner(System.in);
-            row=command.InInt();
+            chosenCell = command.receiveMove();
             //row=reader.nextInt();
             //cin >> row;
             //if (!cin.fail()) {
             //if(true){
                 //cin >> col;
                 //col=reader.nextInt();
-                col=command.InInt();
-                if(true){
+                if(true){ //!!!!!!!!!!!!!!!!!!!!!!!!!!!not okay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 //if (!cin.fail()) {
-                    //adjusting the received co'ordinates (the board starts at 1 but stored as starting at 0)
-                    row = row - 1;
-                    col = col - 1;
-                    BoardCell tmp=new BoardCell(row, col);
+                	
                     //checking if the choice is one of the offered moves
                     //if (find(possibleMoves.begin(), possibleMoves.end(), tmp) != possibleMoves.end()) {
-                    if(possibleMoves.contains(tmp)){
+                    if(possibleMoves.contains(chosenCell)){
                         ok = true;
                     } else {
                         //cout << "your choice isn't one of the offered moves" << endl;
@@ -86,7 +82,6 @@ public class HumanPlayer extends Player {
             //cin.clear();
             //cin.ignore(numeric_limits<streamsize >::max(), '\n');
         }
-        BoardCell chosenCell=new BoardCell(row, col);
         return chosenCell;
     }
     private InOutTerminal command;

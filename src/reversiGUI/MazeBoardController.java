@@ -1,5 +1,7 @@
 package reversiGUI;
 
+import reversiLogic.Board;
+
 import java.io.IOException;
 import java.util.Stack;
 
@@ -15,12 +17,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Sphere;
 
 public class MazeBoardController extends GridPane {
-	private int[][] board;
-	private static final int FREE = 0;
-	private static final int WALL = 1;
+	private Board.SquareColor[][] board;
 	private Player player;
 	
-	public MazeBoardController(int[][] board) {
+	public MazeBoardController(Board.SquareColor[][] board) {
 		this.board = board;
 	 	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeBoard.fxml"));
 	 	fxmlLoader.setRoot(this);
@@ -32,25 +32,6 @@ public class MazeBoardController extends GridPane {
 	 			 //
 	 			 event.consume();
 	 		 });
-	 		 this.setOnKeyPressed(event -> {
-	 			 switch (event.getCode()) {
-	 			 	case DOWN:
-	 			 		player.moveDown();
-	 			 		break;
-	 			 	case UP:
-	 			 		player.moveUp();
-	 			 		break;
-	 			 	case LEFT:
-	 			 		player.moveLeft();
-	 			 		break;
-	 			 	case RIGHT:
-	 			 		player.moveRight();
-	 			 		break;
-	 			 	default:
-	 			 		break;
-	 			 }
-	 			 event.consume();
-	 			 });
 	 		 } catch (IOException exception) {
 	 			 throw new RuntimeException(exception);
 	 	 	}
@@ -69,20 +50,26 @@ public class MazeBoardController extends GridPane {
 			 for (int j = 0; j < board[i].length; j++) {
 				 StackPane stackPane = new StackPane();
 				 stackPane.setBorder(new Border(new BorderStroke(null, null, null, null, null, null, null, null, null, null, getInsets())));
-				 if (board[i][j] == FREE) {
-					 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.CADETBLUE));
-					 stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, Color.WHITE));
-					 //Ellipse ellipse = new Ellipse(cellWidth/2, cellHeight/2, cellWidth/4, cellHeight/4);
-					 //ellipse.setFill(Color.GRAY);
-					 //stackPane.getChildren().add(ellipse);
-					 //stackPane.getChildren().add(new Sphere(cellWidth/4));
-					 this.add(stackPane, j, i);
-				 } else {
-					 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.BLACK));
-					 this.add(stackPane, j, i);
+				 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.CADETBLUE));
+				 switch (board[i][j]) {
+				 	case Black:
+				 		stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, Color.BLACK));
+				 		//Ellipse ellipse = new Ellipse(cellWidth/2, cellHeight/2, cellWidth/4, cellHeight/4);
+				 		//ellipse.setFill(Color.GRAY);
+				 		//stackPane.getChildren().add(ellipse);
+				 		//stackPane.getChildren().add(new Sphere(cellWidth/4));
+				 		break;
+				 	case White:
+				 		stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, Color.WHITE));
+				 		break;
+					default:
+						break;
 				 }
+				 
+				 this.add(stackPane, j, i);
 			 }
 		 }
+		 
 		 player.draw(cellWidth, cellHeight);
 	}
 }

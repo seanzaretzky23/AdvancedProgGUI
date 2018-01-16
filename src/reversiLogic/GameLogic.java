@@ -23,7 +23,7 @@ public abstract class GameLogic {
      * Function operation: returns the list of possible moves for the player
      *       of the received color to preform.
      **************************************************************/
-    public abstract ArrayList<BoardCell> possibleMovesForColor(SquareColor color);
+    public abstract ArrayList<BoardCell> possibleMovesForColor(Board.SquareColor color);
 
     /**************************************************************
      * function name: makeMove
@@ -34,7 +34,7 @@ public abstract class GameLogic {
      *       player to play the next turn (!assums the move being made is one of the valid options
      *       returned by possibleMovesForColor)
      **************************************************************/
-    public abstract boolean makeMove(BoardCell boardCell, SquareColor color);
+    public abstract boolean makeMove(BoardCell boardCell, Board.SquareColor color);
 
     /**************************************************************
      * function name: whoHasMorePoints
@@ -116,7 +116,7 @@ public abstract class GameLogic {
      **************************************************************/
     protected void turnAllPawnsBetweenSameRowCells(BoardCell boardCell1,
                                                    BoardCell boardCell2){
-        SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
+        Board.SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
         //starting co'ordinates are of boardCell1
         int xCor, yCor;
         xCor = boardCell1.getXCor();
@@ -143,7 +143,7 @@ public abstract class GameLogic {
      **************************************************************/
     protected void turnAllPawnsBetweenSameColCells(BoardCell boardCell1,
                                                    BoardCell boardCell2){
-        SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
+        Board.SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
 
         //starting co'ordinates are of boardCell1
         int xCor, yCor;
@@ -170,7 +170,7 @@ public abstract class GameLogic {
      **************************************************************/
     protected void turnAllPawnsBetweenSameDiagCells(BoardCell boardCell1,
                                                     BoardCell boardCell2){
-        SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
+        Board.SquareColor color = this.gameBoard.getColorOfBoardCell(boardCell1);
 
         int xCor1, yCor1, xCor2, yCor2;
         xCor1 = boardCell1.getXCor();
