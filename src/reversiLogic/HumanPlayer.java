@@ -15,6 +15,7 @@ public class HumanPlayer extends Player {
         } else {
             this.playersColor = color;
         }
+        command=new InOutTerminal();
     }
 
     /**************************************************************
@@ -33,30 +34,33 @@ public class HumanPlayer extends Player {
         boolean ok = false;
 
         while (!ok) {
-            System.out.print("Your possible moves: ");
-            //cout << "Your possible moves: ";
-            for (int i = 0; i < possibleMoves.size(); i++) {
-                if (i < possibleMoves.size() - 1) {
-                    System.out.print(possibleMoves.get(i)
-                            .boardCellToString() + ",");
-                    //cout << possibleMoves[i].boardCellToString() + ",";
-                } else {
-                    System.out.println(possibleMoves.get(i)
-                            .boardCellToString());
-                   // cout << possibleMoves[i].boardCellToString() << endl;
-                }
-            }
-
-            System.out.print("\nPlease enter your move in the format: row col\n");
-            System.out.println("(two integers with a space between them, for example: 3 4  )");
-            System.out.println("notice: only the first two integers will be taken");
-            Scanner reader = new Scanner(System.in);
-            row=reader.nextInt();
+//            System.out.print("Your possible moves: ");
+//            //cout << "Your possible moves: ";
+//            for (int i = 0; i < possibleMoves.size(); i++) {
+//                if (i < possibleMoves.size() - 1) {
+//                    System.out.print(possibleMoves.get(i)
+//                            .boardCellToString() + ",");
+//                    //cout << possibleMoves[i].boardCellToString() + ",";
+//                } else {
+//                    System.out.println(possibleMoves.get(i)
+//                            .boardCellToString());
+//                   // cout << possibleMoves[i].boardCellToString() << endl;
+//                }
+//            }
+            command.PrintOptions(possibleMoves);
+//            System.out.print("\nPlease enter your move in the format: row col\n");
+//            System.out.println("(two integers with a space between them, for example: 3 4  )");
+//            System.out.println("notice: only the first two integers will be taken");
+            command.PrintEnterMovesInForm();
+            //Scanner reader = new Scanner(System.in);
+            row=command.InInt();
+            //row=reader.nextInt();
             //cin >> row;
             //if (!cin.fail()) {
             //if(true){
                 //cin >> col;
-                col=reader.nextInt();
+                //col=reader.nextInt();
+                col=command.InInt();
                 if(true){
                 //if (!cin.fail()) {
                     //adjusting the received co'ordinates (the board starts at 1 but stored as starting at 0)
@@ -69,13 +73,14 @@ public class HumanPlayer extends Player {
                         ok = true;
                     } else {
                         //cout << "your choice isn't one of the offered moves" << endl;
-                        System.out.println("your choice isn't one of the offered moves");
+                        command.PrintNotPosMove();
                     }
                 }
             //}
             if (!ok) {
                 //cout << "invalid input, try again\n" << endl;
-                System.out.println("invalid input, try again");
+//                System.out.println("invalid input, try again");
+                command.PrintInvaidInput();
             }
             //clearing input error flag and ignoring previous bad input
             //cin.clear();
@@ -84,5 +89,5 @@ public class HumanPlayer extends Player {
         BoardCell chosenCell=new BoardCell(row, col);
         return chosenCell;
     }
-
+    private InOutTerminal command;
 }

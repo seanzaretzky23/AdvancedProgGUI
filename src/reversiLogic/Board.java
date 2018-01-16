@@ -8,6 +8,7 @@ public abstract class Board {
     protected int boardLength;
     protected int boardWidth;
     protected ArrayList<ArrayList<SquareColor>> gameBoard;
+    protected InOutTerminal command=new InOutTerminal();
 
     /**************************************************************
      * function name: initializeBoard

@@ -1,7 +1,7 @@
 package reversiLogic;
-public class ConsoleBoard extends Board{
+public class ConsoleBoard1 extends Board{
 
-    public ConsoleBoard(int length, int width)
+    public ConsoleBoard1(int length, int width)
     {
         boardLength=length;
         boardWidth=width;
@@ -13,7 +13,7 @@ public class ConsoleBoard extends Board{
         }
 
     }
-    public ConsoleBoard()
+    public ConsoleBoard1()
     {
         boardLength=8;
         boardWidth=8;
@@ -75,61 +75,52 @@ public class ConsoleBoard extends Board{
 //            System.out.print("");
 //            //cout << "" << endl;
 //        }
-//        //JAVA
-//        System.out.print(" |");
-//        //cout << " " << '|';
-//        for (int j = 1; j <= boardLength; j++) {
-//            //cout << ' ' << j << ' ' << '|';
-//            System.out.print(" ");
-//            System.out.print(j);
-//            System.out.print(" ");
-//            System.out.print("|");
-//
-//        }
-//        //cout << "" << endl;
-//        System.out.print(" ");
-//        for (int j = 0; j < (4 * boardLength) + 2; j++) {
-//            //cout << '.';
-//            System.out.print(".");
-//        }
-//        System.out.println(" ");
-//        //cout << "" << endl;
-//        for (int i = 0; i < boardWidth; i++) {
-//            //cout << i + 1 << '|';
-//            System.out.print(i+1);
-//            System.out.print("|");
-//            for (int j = 0; j < boardLength; j++) {
-//
-//                char charToPrint = 0;
-//                switch (this.gameBoard.get(i).get(j)) {
-//                    case Black:
-//                        charToPrint = 'X';
-//                        break;
-//                    case White:
-//                        charToPrint = 'O';
-//                        break;
-//                    case Blank:
-//                        break;
-//                    default:
-//                        charToPrint = ' ';
-//                        break;
-//                }
-//                System.out.print(" ");
-//                System.out.print(charToPrint);
-//                System.out.print("|");
-//                //cout << ' ' << charToPrint << " |";
-//            }
-//            System.out.println("");
-//            //cout << "" << endl;
-//            for (int j = 0; j < (4 * boardLength) + 2; j++) {
-//                System.out.print(".");
-//                //cout << '.';
-//            }
-//            System.out.println("");
-//            //cout << "" << endl;
-//        }
-        command.PrintBoard(boardLength,
-                boardWidth,gameBoard);
+        System.out.print(" |");
+        //cout << " " << '|';
+        for (int j = 1; j <= boardLength; j++) {
+            //cout << ' ' << j << ' ' << '|';
+            System.out.print(" " + j + " |");
+
+        }
+        //cout << "" << endl;
+        System.out.println("");
+        for (int j = 0; j < (4 * boardLength) + 2; j++) {
+            //cout << '.';
+            System.out.print(".");
+        }
+        System.out.println("");
+        //cout << "" << endl;
+        for (int i = 0; i < boardWidth; i++) {
+            //cout << i + 1 << '|';
+            System.out.print(i+1 + "|");
+            for (int j = 0; j < boardLength; j++) {
+
+                char charToPrint = 0;
+                switch (this.gameBoard.get(i).get(j)) {
+                    case Black:
+                        charToPrint = 'X';
+                        break;
+                    case White:
+                        charToPrint = 'O';
+                        break;
+                    default:
+                        charToPrint = ' ';
+                        break;
+                }
+                System.out.print(" ");
+                System.out.print(charToPrint);
+                System.out.print(" |");
+                //cout << ' ' << charToPrint << " |";
+            }
+            System.out.println("");
+            //cout << "" << endl;
+            for (int j = 0; j < (4 * boardLength) + 2; j++) {
+                System.out.print(".");
+                //cout << '.';
+            }
+            System.out.println("");
+            //cout << "" << endl;
+        }
     }
 
 }

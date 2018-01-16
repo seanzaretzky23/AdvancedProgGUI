@@ -68,6 +68,7 @@ public class MazeGameController implements Initializable{
 		 //root.getChildren().add(0, mazeBoard);
 		 root.setLeft(mazeBoard);
 		 root.setOnKeyPressed(mazeBoard.getOnKeyPressed());
+		 root.setOnMouseClicked(mazeBoard.getOnMouseClicked());
 		 mazeBoard.draw();
 	 
 		 root.widthProperty().addListener((observable, oldValue, newValue) -> {
@@ -77,7 +78,8 @@ public class MazeGameController implements Initializable{
 		 });
 
 		 root.heightProperty().addListener((observable, oldValue, newValue) -> {
-		 mazeBoard.setPrefHeight(newValue.doubleValue());
+	     double boardNewHeight = newValue.doubleValue() - 45;
+		 mazeBoard.setPrefHeight(boardNewHeight);
 		 mazeBoard.draw();
 		 });
 		 

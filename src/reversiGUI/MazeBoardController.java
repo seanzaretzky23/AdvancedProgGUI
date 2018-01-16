@@ -9,7 +9,10 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Sphere;
 
 public class MazeBoardController extends GridPane {
 	private int[][] board;
@@ -25,6 +28,10 @@ public class MazeBoardController extends GridPane {
 	 	player = new Player(this, 0, 0);
 	 	try {
 	 		 fxmlLoader.load();
+	 		 this.setOnMouseClicked(event -> {
+	 			 //
+	 			 event.consume();
+	 		 });
 	 		 this.setOnKeyPressed(event -> {
 	 			 switch (event.getCode()) {
 	 			 	case DOWN:
@@ -64,6 +71,11 @@ public class MazeBoardController extends GridPane {
 				 stackPane.setBorder(new Border(new BorderStroke(null, null, null, null, null, null, null, null, null, null, getInsets())));
 				 if (board[i][j] == FREE) {
 					 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.CADETBLUE));
+					 stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, Color.WHITE));
+					 //Ellipse ellipse = new Ellipse(cellWidth/2, cellHeight/2, cellWidth/4, cellHeight/4);
+					 //ellipse.setFill(Color.GRAY);
+					 //stackPane.getChildren().add(ellipse);
+					 //stackPane.getChildren().add(new Sphere(cellWidth/4));
 					 this.add(stackPane, j, i);
 				 } else {
 					 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.BLACK));
