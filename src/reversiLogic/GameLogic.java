@@ -1,6 +1,8 @@
 package reversiLogic;
 import java.util.ArrayList;
 
+import reversiLogic.Board.SquareColor;
+
 public abstract class GameLogic {
 
 
@@ -67,7 +69,28 @@ public abstract class GameLogic {
                 return 3;
             }
         }
-    } ;
+    }
+    
+    /**************************************************************
+     * function name: numberOfPoints
+     * Input: SquareColor colorToCount
+     * @return the number of points of the received color on the board
+     * Function operation: returns the number of points of the
+     * 	received color on the board, throws exception if received Blank
+     **************************************************************/
+    public int numberOfPoints(SquareColor colorToCount) throws RuntimeException {
+    	if (colorToCount == SquareColor.Blank)
+    		throw new IllegalArgumentException("received color can't be Blank");
+    	int counter = 0;
+    	for (int i = 0; i < this.gameBoard.getBoardLength(); i++) {
+            for (int j = 0; j < this.gameBoard.getBoardWidth(); j++) {
+                if (this.gameBoard.getColorOfBoardCell(i, j) == colorToCount) {
+                	counter++;
+                }
+            }
+        }
+    	return counter;
+    }
 
     /**************************************************************
      * function name: turnAllPawnsBetweenTheCells

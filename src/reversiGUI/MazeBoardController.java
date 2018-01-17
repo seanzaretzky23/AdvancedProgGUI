@@ -79,7 +79,6 @@ public class MazeBoardController extends GridPane {
 		 cellHeight = height / board.length;
 		 cellWidth = width / board[0].length;
 		 
-		 this.printBoard(this.board);
 		 
 		 for (int i = 0; i < board.length; i++) {
 			 for (int j = 0; j < board[i].length; j++) {
@@ -107,54 +106,4 @@ public class MazeBoardController extends GridPane {
 		 
 	}
 	
-	//erase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	private void printBoard(SquareColor[][] board) {
-		SquareColor[][] existingBoard = board;
-    	System.out.print(" |");
-        //cout << " " << '|';
-        for (int j = 1; j <= existingBoard.length; j++) {
-            //cout << ' ' << j << ' ' << '|';
-            System.out.print(" " + j + " |");
-
-        }
-        //cout << "" << endl;
-        System.out.println("");
-        for (int j = 0; j < (4 * existingBoard.length) + 2; j++) {
-            //cout << '.';
-            System.out.print(".");
-        }
-        System.out.println("");
-        //cout << "" << endl;
-        for (int i = 0; i < existingBoard[0].length; i++) {
-            //cout << i + 1 << '|';
-            System.out.print(i+1 + "|");
-            for (int j = 0; j < existingBoard.length; j++) {
-
-                char charToPrint = 0;
-                switch (existingBoard[i][j]) {
-                    case Black:
-                        charToPrint = 'X';
-                        break;
-                    case White:
-                        charToPrint = 'O';
-                        break;
-                    default:
-                        charToPrint = ' ';
-                        break;
-                }
-                System.out.print(" ");
-                System.out.print(charToPrint);
-                System.out.print(" |");
-                //cout << ' ' << charToPrint << " |";
-            }
-            System.out.println("");
-            //cout << "" << endl;
-            for (int j = 0; j < (4 * existingBoard.length) + 2; j++) {
-                System.out.print(".");
-                //cout << '.';
-            }
-            System.out.println("");
-            //cout << "" << endl;
-        }
-	}
 }

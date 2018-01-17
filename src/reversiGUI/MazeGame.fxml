@@ -13,7 +13,7 @@
 			<children>
 				<VBox alignment="TOP_CENTER" prefHeight="172.0" prefWidth="250" spacing="10">
 					<padding>
-						<Insets top="5" right="10" bottom="5" left="10"></Insets>
+						<Insets bottom="5" left="10" right="10" top="5" />
 					</padding>
 					<children>
                   <HBox prefHeight="23.0" prefWidth="250.0">
@@ -30,7 +30,7 @@
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="72.0">
                      <children>
-                        <Label prefHeight="15.0" prefWidth="134.0" text="Second player score: " />
+                        <Label prefHeight="15.0" prefWidth="148.0" text="Second player score: " />
                         <Label fx:id="secondPlayerScore" text="2" />
                      </children>
                   </HBox>

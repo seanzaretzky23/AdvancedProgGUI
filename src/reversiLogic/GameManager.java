@@ -133,15 +133,18 @@ public class GameManager {
             this.printWhosNextTurn();
             //checking if there are options for the next player, to maybe skip his turn or finish the game (if no more moves for anybody)
             //getting the index of the other player
-        	int j = Math.abs(i - 1);
+        	//int j = Math.abs(i - 1); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            int j = this.getIndexOfWhichPlayerTurn(this.whosTurn);
             ArrayList<BoardCell> possibleMovesForNextTurn = this.gameLogic.possibleMovesForColor(this.players[j].getColor());
             if (possibleMovesForNextTurn.size() == 0) {
-            	this.checkIfNoOptionsInNextMove(i);
+            	//this.checkIfNoOptionsInNextMove(i); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            	this.checkIfNoOptionsInNextMove(this.getIndexOfWhichPlayerTurn(!this.whosTurn));
             	this.printWhosNextTurn();
             } 
         } else {
         	//getting the index of the other player
-        	int j = Math.abs(i - 1);
+        	//int j = Math.abs(i - 1); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        	int j = this.getIndexOfWhichPlayerTurn(!this.whosTurn);
         	this.checkIfNoOptionsInNextMove(j);
         	this.printWhosNextTurn();
         }
@@ -163,6 +166,21 @@ public class GameManager {
     
     public Board.SquareColor[][] getGameBoard() {
     	return this.board.getBoard();
+    }
+    
+    private int getIndexOfWhichPlayerTurn(boolean whichPlayersTUrn) {
+    	if (whichPlayersTUrn)
+    		return 0;
+    	else 
+    		return 1;
+    }
+    
+    public int numberOfPointsOfFirstPlayer() {
+    	return this.gameLogic.numberOfPoints(this.players[0].getColor());
+    }
+    
+    public int numberOfPointsOfSecondPlayer() {
+    	return this.gameLogic.numberOfPoints(this.players[1].getColor());
     }
 
     private Player[] players; // players[0] is for player 1 and players[1] is for player 2

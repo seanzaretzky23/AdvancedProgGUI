@@ -85,6 +85,7 @@ public class InOutGUI implements InOutAbs{
 			}
 		}
 		this.mazeGameController.getMazeBoard().updateBoard(newBoard);
+		this.mazeGameController.updatePointsOfPlayers();
 		this.mazeGameController.getMazeBoard().draw();
 	}
 

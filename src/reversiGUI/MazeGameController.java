@@ -105,6 +105,11 @@ public class MazeGameController implements Initializable{
 			 this.whichPlayer.setText("Second");
 	 }
 	 
+	 public void updatePointsOfPlayers() {
+		 this.firstPlayerScore.setText("" + this.gameManager.numberOfPointsOfFirstPlayer());
+		 this.secondPlayerScore.setText("" + this.gameManager.numberOfPointsOfSecondPlayer());
+	 }
+	 
 	 public MazeBoardController getMazeBoard() {
 		 return this.mazeBoard;
 	 }
