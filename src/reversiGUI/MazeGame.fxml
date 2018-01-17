@@ -19,19 +19,19 @@
                   <HBox prefHeight="23.0" prefWidth="250.0">
                      <children>
                         <Label alignment="TOP_LEFT" prefHeight="15.0" prefWidth="108.0" text="Current Player: " />
-                        <Label text="Black" />
+                        <Label fx:id="whichPlayer" text="Black" />
                      </children>
                   </HBox>
                   <HBox prefHeight="24.0" prefWidth="250.0">
                      <children>
-                        <Label text="Black player score: " />
-                        <Label text="2" />
+                        <Label text="First player score: " />
+                        <Label fx:id="firstPlayerScore" text="2" />
                      </children>
                   </HBox>
                   <HBox prefHeight="0.0" prefWidth="72.0">
                      <children>
-                        <Label prefHeight="15.0" prefWidth="134.0" text="White player score: " />
-                        <Label text="2" />
+                        <Label prefHeight="15.0" prefWidth="134.0" text="Second player score: " />
+                        <Label fx:id="secondPlayerScore" text="2" />
                      </children>
                   </HBox>
 					</children>

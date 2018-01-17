@@ -128,8 +128,7 @@ public class ConsoleBoard extends Board{
 //            System.out.println("");
 //            //cout << "" << endl;
 //        }
-        command.PrintBoard(boardLength,
-                boardWidth,gameBoard);
+        command.PrintBoard(this);
     }
 
 }

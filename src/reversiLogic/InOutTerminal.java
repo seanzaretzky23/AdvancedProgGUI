@@ -2,6 +2,8 @@ package reversiLogic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import reversiLogic.Board.SquareColor;
+
 public class InOutTerminal implements InOutAbs {
 
 	private Scanner reader;
@@ -70,32 +72,31 @@ public class InOutTerminal implements InOutAbs {
         System.out.println("invalid input, try again");
    }
    @Override
-    public void PrintBoard(int boardLength,int boardWidth,
-                            ArrayList<ArrayList<Board.SquareColor>> gameBoard)
+    public void PrintBoard(Board board)
     {
-
+	   SquareColor[][] existingBoard = board.getBoard();
     	System.out.print(" |");
         //cout << " " << '|';
-        for (int j = 1; j <= boardLength; j++) {
+        for (int j = 1; j <= existingBoard.length; j++) {
             //cout << ' ' << j << ' ' << '|';
             System.out.print(" " + j + " |");
 
         }
         //cout << "" << endl;
         System.out.println("");
-        for (int j = 0; j < (4 * boardLength) + 2; j++) {
+        for (int j = 0; j < (4 * existingBoard.length) + 2; j++) {
             //cout << '.';
             System.out.print(".");
         }
         System.out.println("");
         //cout << "" << endl;
-        for (int i = 0; i < boardWidth; i++) {
+        for (int i = 0; i < existingBoard[0].length; i++) {
             //cout << i + 1 << '|';
             System.out.print(i+1 + "|");
-            for (int j = 0; j < boardLength; j++) {
+            for (int j = 0; j < existingBoard.length; j++) {
 
                 char charToPrint = 0;
-                switch (gameBoard.get(i).get(j)) {
+                switch (existingBoard[i][j]) {
                     case Black:
                         charToPrint = 'X';
                         break;
@@ -113,7 +114,7 @@ public class InOutTerminal implements InOutAbs {
             }
             System.out.println("");
             //cout << "" << endl;
-            for (int j = 0; j < (4 * boardLength) + 2; j++) {
+            for (int j = 0; j < (4 * existingBoard.length) + 2; j++) {
                 System.out.print(".");
                 //cout << '.';
             }
@@ -151,6 +152,7 @@ public class InOutTerminal implements InOutAbs {
         	case 3:
         		System.out.println("Its a tie");
         		//cout << "Its a tie" << endl;
+        		break;
         }
     }
 }

@@ -11,8 +11,7 @@ public interface InOutAbs {
     public abstract void PrintNotPosMove();
     public abstract void PrintEnterMovesInForm();
     public abstract void PrintInvaidInput();
-    public abstract void PrintBoard(int boardLength,int boardWidth,
-                                    ArrayList<ArrayList<Board.SquareColor>> gameBoard);
+    public abstract void PrintBoard(Board board);
     public abstract void PrintGameOver();
     public abstract void PrintNoMoves(boolean isEnd );
 }

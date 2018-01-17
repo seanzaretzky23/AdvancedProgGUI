@@ -24,13 +24,25 @@ import javafx.stage.Stage;
 public class MazeGameController implements Initializable{
 	@FXML
 	 private BorderPane root;
-	 private GameManager gameManger;
+	@FXML
+	private Label whichPlayer;
+	@FXML
+	private Label firstPlayerScore;
+	@FXML
+	private Label secondPlayerScore;
+	
+	 private GameManager gameManager;
+	 private MazeBoardController mazeBoard;
 	
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
+		 TurnManager turnManager = new TurnManager();
 		 int boardSize = 8; // read it from the settings file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 this.gameManger = new GameManager(boardSize, new InOutGUI());
-		 MazeBoardController mazeBoard = new MazeBoardController(this.gameManger.getGameBoard());
+		 this.mazeBoard = new MazeBoardController(boardSize, turnManager);
+		 this.gameManager = new GameManager(boardSize, new InOutGUI(this, turnManager));
+		 PlayerMoveListener playerMoveListener = new PlayerMoveListener(this.gameManager);
+		 this.mazeBoard.setPlayerMoveListener(playerMoveListener);
+		 mazeBoard.updateBoard(gameManager.getGameBoard());
 		 mazeBoard.setPrefWidth(410);
 		 mazeBoard.setPrefHeight(410);
 		 
@@ -82,6 +94,18 @@ public class MazeGameController implements Initializable{
 		 mazeBoard.setPrefHeight(boardNewHeight);
 		 mazeBoard.draw();
 		 });
-		 
+		 //initialize the labels (based on the states of the gameManager)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 }
+	 
+	 public void setWhosTurn(boolean whosTurn) {
+		 //if its the first player's turn
+		 if (whosTurn)
+			 this.whichPlayer.setText("First");
+		 else
+			 this.whichPlayer.setText("Second");
+	 }
+	 
+	 public MazeBoardController getMazeBoard() {
+		 return this.mazeBoard;
 	 }
 }

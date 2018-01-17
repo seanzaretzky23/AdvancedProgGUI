@@ -9,13 +9,13 @@ public class HumanPlayer extends Player {
      * Function operation: creates a HumanPlayer object of the specified color.
      *      throws an exception if color is Blank
      **************************************************************/
-    public HumanPlayer(Board.SquareColor color){
+    public HumanPlayer(Board.SquareColor color, InOutAbs communicationAdapt){
         if (color == Board.SquareColor.Blank) {
             throw new IllegalArgumentException("player's color can only be black or white");
         } else {
             this.playersColor = color;
         }
-        command=new InOutTerminal();
+        command = communicationAdapt;
     }
 
     /**************************************************************
@@ -84,5 +84,5 @@ public class HumanPlayer extends Player {
         }
         return chosenCell;
     }
-    private InOutTerminal command;
+    private InOutAbs command;
 }

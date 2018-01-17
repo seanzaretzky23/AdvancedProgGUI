@@ -15,8 +15,8 @@ public class GameManager {
         noMoves=false;
         gameOver=false;
         this.players=new Player[2];
-        this.players[0] = new HumanPlayer(Board.SquareColor.Black);
-        this.players[1] = new HumanPlayer(Board.SquareColor.White);
+        this.players[0] = new HumanPlayer(Board.SquareColor.Black, communicationAdapt);
+        this.players[1] = new HumanPlayer(Board.SquareColor.White, communicationAdapt);
         //calling for ConsoleBoard with the default parameters
         this.board = new ConsoleBoard();
         this.gameLogic = new StandardLogic(this.board);
@@ -35,8 +35,8 @@ public class GameManager {
         noMoves=false;
         gameOver=false;
         this.players=new Player[2];
-        this.players[0] = new HumanPlayer(Board.SquareColor.Black);
-        this.players[1] = new HumanPlayer(Board.SquareColor.White);
+        this.players[0] = new HumanPlayer(Board.SquareColor.Black, communicationAdapt);
+        this.players[1] = new HumanPlayer(Board.SquareColor.White, communicationAdapt);
         this.board = new ConsoleBoard(boardSize, boardSize);
         this.gameLogic = new StandardLogic(this.board);
         command=communicationAdapt;
@@ -97,7 +97,7 @@ public class GameManager {
                 command.PrintGameOver();
 //                System.out.println("Game is over. the final board:");
                 //cout << "Game is over. the final board:" << endl;
-                this.board.printBoard();
+                command.PrintBoard(this.board);
 //                switch(winner) {
 //                    case 1:
 //                        System.out.println("Player1 (X) is the winner");
@@ -116,7 +116,7 @@ public class GameManager {
             }
             if (!this.noMoves) {
                 //cout << "Current board:\n" << endl;
-                this.board.printBoard();
+                command.PrintBoard(this.board);
             }
             if (whosTurn == true) {//next turn belongs to player 1
                 this.playNextTurn(0);
