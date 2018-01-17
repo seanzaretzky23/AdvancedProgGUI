@@ -37,7 +37,7 @@ public class MazeGameController implements Initializable{
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
 		 TurnManager turnManager = new TurnManager();
-		 int boardSize = 8; // read it from the settings file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 int boardSize = 4; // read it from the settings file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		 this.mazeBoard = new MazeBoardController(boardSize, turnManager);
 		 this.gameManager = new GameManager(boardSize, new InOutGUI(this, turnManager));
 		 PlayerMoveListener playerMoveListener = new PlayerMoveListener(this.gameManager);

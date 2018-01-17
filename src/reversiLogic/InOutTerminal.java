@@ -58,7 +58,7 @@ public class InOutTerminal implements InOutAbs {
     };
     @Override
     public void PrintNotPosMove(){
-        System.out.println("your choice isn't one of the offered moves");
+        System.out.println("your choice isn't one of the possible moves");
     }
 
     @Override

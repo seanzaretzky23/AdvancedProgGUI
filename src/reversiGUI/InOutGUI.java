@@ -60,7 +60,7 @@ public class InOutGUI implements InOutAbs{
 	@Override
 	public void PrintNotPosMove() {
 		// TODO Auto-generated method stub
-		//maybe put something here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		AlertBoxFactory.display("Invalid Input", "Your choice isn't one of the possible moves");
 	}
 
 	@Override

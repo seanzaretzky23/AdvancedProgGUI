@@ -49,83 +49,42 @@ public class GameManager {
      * Function operation: plays a game of reversi
      **************************************************************/
     public void playNextGameIteration(){
-//        while (true) {
-//            if (this.board.gameBoardFull()) {
-//                this.gameOver = true;
-//            }
-//            if (this.gameOver) {
-//                int winner = this.gameLogic.whoHasMorePoints();
-//                //cout << "Game is over. the final board:" << endl;
-//                System.out.println( "Game is over. the final board:");
-//                this.board.printBoard();
-//                switch(winner) {
-//                    case 1:
-//                        //cout << "Player1 (X) is the winner" << endl;
-//                        System.out.println("Player1 (X) is the winner");
-//                        break;
-//                    case 2:
-//                        //cout << "player2 (O) is the winner" << endl;
-//                        System.out.println("Player2 (O) is the winner");
-//                        break;
-//                    case 3:
-//                        //cout << "Its a tie" << endl;
-//                        System.out.println("Its a tie");
-//                }
-//                break;
-//            }
-//            if (!this.noMoves) {
-//                //cout << "Current board:\n" << endl;
-//                System.out.println("Current board:\n");
-//                this.board.printBoard();
-//            }
-//            if (whosTurn) {
-//                    //next turn belongs to player 1
-//                    this.playNextTurn(0);
-//                   }
-//
-//                else {
-//                //next turn belongs to player 2
-//                this.playNextTurn(1);
-//                }
-//        }
-            if (this.board.gameBoardFull()) {
-                this.gameOver = true;
-            }
-            if (this.gameOver) {
-                int winner = this.gameLogic.whoHasMorePoints();
-               //InOutAbs.
-                command.PrintGameOver();
-//                System.out.println("Game is over. the final board:");
-                //cout << "Game is over. the final board:" << endl;
-                command.PrintBoard(this.board);
-//                switch(winner) {
-//                    case 1:
-//                        System.out.println("Player1 (X) is the winner");
-//                        //cout << "Player1 (X) is the winner" << endl;
-//                        break;
-//                    case 2:
-//                        System.out.println("player2 (O) is the winner");
-//                        //cout << "player2 (O) is the winner" << endl;
-//                        break;
-//                    case 3:
-//                        System.out.println("Its a tie");
-//                        //cout << "Its a tie" << endl;
-//                }
-                command.PrintWhoWon(winner);
-                return;
-            }
-            if (!this.noMoves) {
-                //cout << "Current board:\n" << endl;
-                command.PrintBoard(this.board);
-            }
-            if (whosTurn == true) {//next turn belongs to player 1
-                this.playNextTurn(0);
-
-            } else {//next turn belongs to player 2
-                this.playNextTurn(1);
-
-            }
-        
+    	    
+    	if (checkForEndOfGame())
+    		return;
+            
+    	if (!this.noMoves) {
+    		command.PrintBoard(this.board);
+    	}
+    	if (whosTurn == true) {//next turn belongs to player 1
+    		this.playNextTurn(0);
+    	} else {
+    		//next turn belongs to player 2
+    		this.playNextTurn(1);
+    	}
+    	command.PrintBoard(this.board); 
+    	checkForEndOfGame();
+    }
+    
+    /**************************************************************
+     * function name: checkForEndOfGame
+     * Input: no input
+     * @return boolean
+     * Function operation: checks if its the game ended, if it did
+     *	performs end of game proceeder
+     **************************************************************/
+    private boolean checkForEndOfGame() {
+    	boolean returnValue = false;
+    	if (this.board.gameBoardFull()) {
+    		this.gameOver = true;
+    	}
+        if (this.gameOver) {
+            int winner = this.gameLogic.whoHasMorePoints();
+            command.PrintGameOver();
+            command.PrintWhoWon(winner);
+            returnValue = true;
+        }
+        return returnValue;
     }
 
 
@@ -164,31 +123,48 @@ public class GameManager {
 
         possibleMoves = this.gameLogic.possibleMovesForColor(this.players[i].getColor());
         if (possibleMoves.size() != 0) {
-            this.noMoves = false;
-            chosenMove = new BoardCell(this.players[i].makeMove(possibleMoves));
+        	this.noMoves = false;
+            BoardCell playersChoiceTmp = this.players[i].makeMove(possibleMoves);
+            //if the players choice was invalid
+            if (playersChoiceTmp == null)
+            	return;
+            chosenMove = new BoardCell(playersChoiceTmp);
             this.whosTurn = this.gameLogic.makeMove(chosenMove, this.players[i].getColor());
+            this.printWhosNextTurn();
+            //checking if there are options for the next player, to maybe skip his turn or finish the game (if no more moves for anybody)
+            //getting the index of the other player
+        	int j = Math.abs(i - 1);
+            ArrayList<BoardCell> possibleMovesForNextTurn = this.gameLogic.possibleMovesForColor(this.players[j].getColor());
+            if (possibleMovesForNextTurn.size() == 0) {
+            	this.checkIfNoOptionsInNextMove(i);
+            	this.printWhosNextTurn();
+            } 
         } else {
-            if (this.noMoves == false) {
-                this.noMoves = true;
-                command.PrintNoMoves(false);
-                //cin.ignore(numeric_limits<streamsize >::max(), '\n');
-                this.whosTurn = !this.whosTurn;
-            } else {
-                //neither one of the players has valid moves left to make
-                this.gameOver = true;
-                command.PrintNoMoves(true);
-                //cout << "No possible moves. Press enter to continue." << endl;
-                //cin.ignore(numeric_limits<streamsize >::max(), '\n');
-            }
+        	//getting the index of the other player
+        	int j = Math.abs(i - 1);
+        	this.checkIfNoOptionsInNextMove(j);
+        	this.printWhosNextTurn();
         }
-    };
+    }
     
+    private void checkIfNoOptionsInNextMove(int j) {
+    	ArrayList<BoardCell> possibleMovesForNextTurn = this.gameLogic.possibleMovesForColor(this.players[j].getColor());
+    	if (possibleMovesForNextTurn.size() != 0) {
+    		//there are no moves only for the current player, the game isn't over yet
+    		this.noMoves = true;
+    		command.PrintNoMoves(false);
+    		this.whosTurn = !this.whosTurn;
+    	} else {
+    		//the game is over because non of the players has possible moves left
+    		this.gameOver = true;
+    		command.PrintNoMoves(true);
+    	}
+    }
     
     public Board.SquareColor[][] getGameBoard() {
     	return this.board.getBoard();
     }
 
-//2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private Player[] players; // players[0] is for player 1 and players[1] is for player 2
     private GameLogic gameLogic;
     private Board board;

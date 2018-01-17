@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Board {
 	public enum SquareColor {Black, White, Blank};
-	
+	private static final int DefaultBoardSize = 8;
     protected int boardLength;
     protected int boardWidth;
     protected ArrayList<ArrayList<SquareColor>> gameBoard;
@@ -20,11 +20,11 @@ public abstract class Board {
      **************************************************************/
     public void initializeBoard(){
         for (int i = 0; i < this.boardLength; i++) {
-            ArrayList<SquareColor> row=new ArrayList<>();
+            ArrayList<SquareColor> row = new ArrayList<>();
             for (int j = 0; j < this.boardWidth; j++) {
-                boolean add = row.add(SquareColor.Blank);
+                row.add(SquareColor.Blank);
             }
-            boolean add = this.gameBoard.add(row);
+            this.gameBoard.add(row);
         }
 
         //creating the middle square
@@ -35,12 +35,8 @@ public abstract class Board {
         gameBoard.get(topLeftRow+1).set(topLeftColumn,SquareColor.Black);
         gameBoard.get(topLeftRow).set(topLeftColumn+1,SquareColor.Black);
         gameBoard.get(topLeftRow+1).set(topLeftColumn+1,SquareColor.White);
-//        gameBoard[topLeftRow][topLeftColumn] = SquareColor.White;
-//        gameBoard[topLeftRow + 1][topLeftColumn] = SquareColor.Black;
-//        gameBoard[topLeftRow][topLeftColumn + 1] = SquareColor.Black;
-//        gameBoard[topLeftRow + 1][topLeftColumn + 1] = SquareColor.White;
 
-    };
+    }
     /**************************************************************
      * function name: Board class builder
      * Input: none
@@ -50,9 +46,9 @@ public abstract class Board {
      **************************************************************/
 
     public Board() {
-        boardLength=8;
-        boardWidth=8;
-        gameBoard=new ArrayList<ArrayList<SquareColor>>();
+        boardLength = DefaultBoardSize;
+        boardWidth = DefaultBoardSize;
+        gameBoard = new ArrayList<ArrayList<SquareColor>>();
         //checking for valid board, if valid initialize
         if (boardLength >= 2 && (boardLength % 2) == 0 && boardWidth >= 2 && (boardWidth % 2) == 0) {
             this.initializeBoard();
@@ -75,6 +71,7 @@ public abstract class Board {
 
         boardLength=length;
         boardWidth=width;
+        gameBoard = new ArrayList<ArrayList<SquareColor>>();
         //checking for valid board, if valid initialize
         if (boardLength >= 2 && (boardLength % 2) == 0 && boardWidth >= 2 && (boardWidth % 2) == 0) {
             this.initializeBoard();

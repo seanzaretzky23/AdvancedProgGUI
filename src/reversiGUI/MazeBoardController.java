@@ -19,7 +19,6 @@ import javafx.scene.shape.Sphere;
 
 public class MazeBoardController extends GridPane {
 	private Board.SquareColor[][] board;
-	private Player player;
 	private TurnManager turnManager;
 	private int cellHeight;
 	private int cellWidth;
@@ -33,7 +32,6 @@ public class MazeBoardController extends GridPane {
 	 	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeBoard.fxml"));
 	 	fxmlLoader.setRoot(this);
 	 	fxmlLoader.setController(this);
-	 	player = new Player(this, 0, 0);
 	 	try {
 	 		 fxmlLoader.load();
 	 		 this.setOnMouseClicked(event -> {
@@ -41,8 +39,8 @@ public class MazeBoardController extends GridPane {
 	 			 horizontalIndex = (int)((event.getX())/this.cellWidth);
 	 			 verticalIndex = (int)((event.getY())/this.cellHeight);
 	 			 this.turnManager.updateTurn(horizontalIndex, verticalIndex);
-	 			 System.out.println(horizontalIndex + ", " + verticalIndex);
 	 			 this.playerMoveListener.playNextTurn();
+	 			 this.draw();
 	 			 event.consume();
 	 		 });
 	 		 } catch (IOException exception) {
@@ -63,7 +61,7 @@ public class MazeBoardController extends GridPane {
 	public void updateBoard(Board.SquareColor[][] newBoard) {
 		for (int i = 0; i < newBoard.length; i++) {
 			for (int j = 0; j < newBoard[0].length; j++) {
-				this.board[i][j] = newBoard[i][j];
+				this.board[i][j] = newBoard[j][i];
 			}
 		}
 	}
@@ -107,7 +105,6 @@ public class MazeBoardController extends GridPane {
 			 }
 		 }
 		 
-		 player.draw(cellWidth, cellHeight);
 	}
 	
 	//erase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
