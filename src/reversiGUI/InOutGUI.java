@@ -48,7 +48,7 @@ public class InOutGUI implements InOutAbs{
     		AlertBoxFactory.display("Winning announcement", "Its a tie");
     		break;
 		}
-		
+		this.mazeGameController.closeTheGame();
 	}
 
 	@Override

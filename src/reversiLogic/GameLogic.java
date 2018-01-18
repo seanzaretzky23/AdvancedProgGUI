@@ -57,6 +57,8 @@ public abstract class GameLogic {
                     case Black:
                         blackCounter++;
                         break;
+                    default:
+                    	break;
                 }
             }
         }

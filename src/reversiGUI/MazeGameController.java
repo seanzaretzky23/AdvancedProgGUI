@@ -37,22 +37,19 @@ public class MazeGameController implements Initializable{
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
 		 TurnManager turnManager = new TurnManager();
-		 int boardSize = 4; // read it from the settings file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		 SettingsFileHandler fileHandler = new SettingsFileHandler();
+		 int boardSize = fileHandler.getBoardSize();
 		 this.mazeBoard = new MazeBoardController(boardSize, turnManager);
 		 this.gameManager = new GameManager(boardSize, new InOutGUI(this, turnManager));
 		 PlayerMoveListener playerMoveListener = new PlayerMoveListener(this.gameManager);
 		 this.mazeBoard.setPlayerMoveListener(playerMoveListener);
 		 mazeBoard.updateBoard(gameManager.getGameBoard());
-		 mazeBoard.setPrefWidth(410);
-		 mazeBoard.setPrefHeight(410);
+		 mazeBoard.setPrefWidth(600);
+		 mazeBoard.setPrefHeight(600);
 		 
 		 Menu optionsMenu = new Menu("Options");
 		 MenuItem settingsMenuItem = new MenuItem("Settings...");
 		 settingsMenuItem.setOnAction(e -> {
-			 	// !!!!!!!!!!!!!!!!!!!!!!! put the creation of the settings window here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			 	System.out.println("pressed");
-			 	/*AlertBoxFactory.display("Notice", "Invalid choice");*/
-			 	
 			 	Stage window = new Stage();
 		     	//Block events to other windows (together with the window.showAndWait command)
 		        window.initModality(Modality.APPLICATION_MODAL);
@@ -112,5 +109,10 @@ public class MazeGameController implements Initializable{
 	 
 	 public MazeBoardController getMazeBoard() {
 		 return this.mazeBoard;
+	 }
+	 
+	 public void closeTheGame() {
+		 Stage stage = (Stage)this.firstPlayerScore.getScene().getWindow();
+		 stage.close();
 	 }
 }

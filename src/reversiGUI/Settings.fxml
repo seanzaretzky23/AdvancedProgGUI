@@ -23,7 +23,7 @@
     	<Label text="Second player's color: " GridPane.columnIndex="0" GridPane.rowIndex="2" />	
       <ColorPicker fx:id="colorPickerFirst" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <ColorPicker fx:id="colorPickerSecond" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Button onAction="#saveSettings" prefHeight="25.0" prefWidth="144.0" text="SAVE SETTINGS" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="saveButton" onAction="#saveSettings" prefHeight="25.0" prefWidth="144.0" text="SAVE SETTINGS" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="Board size: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
       <ChoiceBox fx:id="choiceBox" prefHeight="31.0" prefWidth="108.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
    </children>
