@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import reversilogic.Board;
 
@@ -67,6 +68,44 @@ public class MazeBoardController extends GridPane {
 		this.playerMoveListener = playerMoveListener;
 	}
 	
+	private Ellipse getbackgroudEllipse(int playerNumber) {
+		Ellipse bg = new Ellipse(cellWidth * 0.3125, cellHeight * 0.26);
+		switch (playerNumber) {
+		case 1:
+			bg.setFill(secondPlayerColor);
+			break;
+		case 2:
+			bg.setFill(firstPlayerColor);
+			break;
+		default:
+			throw new IllegalArgumentException("player number can only be 1 or 2 (first or second)");
+		}
+ 		bg.setStroke(Color.BLACK);
+ 		bg.setStrokeWidth(cellWidth * 0.03);
+ 		bg.setTranslateX((cellWidth - cellWidth * 0.3125 * 2)/2 - cellWidth * 0.14);
+ 		bg.setTranslateY((cellHeight - cellHeight * 0.26 * 2)/2 - cellHeight * 0.14);
+ 		return bg;
+	}
+	
+	private Ellipse getPawnEllipse(int playerNumber) {
+		Ellipse ellipse = new Ellipse(cellWidth * 0.3125, cellHeight * 0.26);
+		switch (playerNumber) {
+		case 1:
+			ellipse.setFill(firstPlayerColor);
+			break;
+		case 2:
+			ellipse.setFill(secondPlayerColor);
+			break;
+		default:
+			throw new IllegalArgumentException("player number can only be 1 or 2 (first or second)");
+		}
+ 		ellipse.setStroke(Color.BLACK);
+ 		ellipse.setStrokeWidth(cellWidth * 0.03);
+ 		ellipse.setTranslateX((cellWidth - cellWidth * 0.3125 * 2)/2 - cellWidth * 0.14);
+ 		ellipse.setTranslateY((cellHeight - cellHeight * 0.26 * 2)/2 - cellHeight * 0.21);
+ 		return ellipse;
+	}
+	
 	public void draw() {
 		 this.getChildren().clear();
 
@@ -86,14 +125,14 @@ public class MazeBoardController extends GridPane {
 				 stackPane.getChildren().add(new Rectangle(cellWidth, cellHeight, Color.BURLYWOOD));
 				 switch (board[i][j]) {
 				 	case Black:
-				 		stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, this.firstPlayerColor));
-				 		//Ellipse ellipse = new Ellipse(cellWidth/2, cellHeight/2, cellWidth/4, cellHeight/4);
-				 		//ellipse.setFill(Color.GRAY);
-				 		//stackPane.getChildren().add(ellipse);
-				 		//stackPane.getChildren().add(new Sphere(cellWidth/4));
+				 		Ellipse bg1 = this.getbackgroudEllipse(1);
+				 		Ellipse ellipse1 = this.getPawnEllipse(1);
+				 		stackPane.getChildren().addAll(bg1, ellipse1);
 				 		break;
 				 	case White:
-				 		stackPane.getChildren().add(new Circle(cellWidth/2, cellHeight/2, cellWidth/4, this.secondPlayerColor));
+				 		Ellipse bg2 = this.getbackgroudEllipse(2);
+				 		Ellipse ellipse2 = this.getPawnEllipse(2);
+				 		stackPane.getChildren().addAll(bg2, ellipse2);
 				 		break;
 					default:
 						break;
